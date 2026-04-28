@@ -42,6 +42,108 @@
   --transition:  .3s cubic-bezier(.4,0,.2,1);
 }
 
+/* ════════════════════════════════════════════
+   BARRA DE ESCASEZ
+════════════════════════════════════════════ */
+.scarcity-bar {
+  background: linear-gradient(90deg, #B45309, #D97706, #B45309);
+  background-size: 200% 100%;
+  animation: scarcity-shimmer 3s ease infinite;
+  color: white;
+  padding: 10px 16px;
+  text-align: center;
+  position: relative;
+  z-index: 1100;
+}
+@keyframes scarcity-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.scarcity-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.scarcity-icon { font-size: 1.1rem; flex-shrink: 0; }
+.scarcity-text {
+  font-size: .88rem;
+  line-height: 1.4;
+}
+.scarcity-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  color: #92400E;
+  font-weight: 700;
+  font-size: .82rem;
+  padding: 6px 14px;
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: var(--transition);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.scarcity-cta-btn:hover {
+  background: #FEF3C7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+.scarcity-cta-btn i { font-size: .75rem; }
+.scarcity-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.8);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.scarcity-close:hover { color: white; }
+
+/* Badge de escasez en hero */
+.scarcity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+  color: #92400E;
+  font-size: .83rem;
+  padding: 7px 14px;
+  border-radius: 50px;
+  margin-top: 14px;
+}
+.scarcity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D97706;
+  flex-shrink: 0;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .25; }
+}
+@media (max-width: 768px) {
+  .scarcity-bar-inner { gap: 8px; }
+  .scarcity-text { font-size: .8rem; }
+}
+@media (max-width: 1024px) {
+  .scarcity-badge { justify-content: center; }
+}
+
 /* ── Reset & Base ───────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

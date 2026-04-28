@@ -11,6 +11,16 @@
 </head>
 <body>
 
+<!-- ═══════════════ BARRA DE ESCASEZ ═══════════════ -->
+<div class="scarcity-bar" id="scarcityBar">
+  <div class="scarcity-bar-inner">
+    <span class="scarcity-icon">🔥</span>
+    <span class="scarcity-text"><strong>¡Solo 10 cupos disponibles esta semana!</strong> — Las citas se agotan rápido. Asegura el tuyo ahora.</span>
+    <a href="https://wa.me/593998944730?text=Hola,%20Dra.%20Escobar.%20Me%20gustaría%20agendar%20una%20cita%20médica." class="scarcity-cta-btn" target="_blank" rel="noopener">Agendar ya <i class="fas fa-arrow-right"></i></a>
+    <button class="scarcity-close" onclick="this.parentElement.parentElement.style.display='none'" aria-label="Cerrar">✕</button>
+  </div>
+</div>
+
 <!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav id="navbar">
   <div class="nav-container">
@@ -66,6 +76,10 @@
         <a href="#servicios" class="btn btn-ghost btn-lg">
           <i class="fas fa-play-circle"></i> Conocer más
         </a>
+      </div>
+      <div class="scarcity-badge">
+        <span class="scarcity-dot"></span>
+        <span>Solo <strong>10 cupos</strong> disponibles esta semana · <em>Reserva tu lugar</em></span>
       </div>
       <div class="hero-social">
         <span class="social-label">Sígueme en:</span>
