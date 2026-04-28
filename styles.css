@@ -2346,3 +2346,105 @@ h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: .02em; text-transform
   .whatsapp-float { bottom: 20px; right: 20px; }
   .result-cards { grid-template-columns: 1fr; }
 }
+
+/* ════════════════════════════════════════════
+   REDES SOCIALES
+════════════════════════════════════════════ */
+.hero-social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.social-label {
+  font-size: .85rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 50px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: white;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.social-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,.22);
+}
+.social-instagram {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+.social-tiktok {
+  background: #010101;
+}
+.social-facebook {
+  background: #1877F2;
+}
+
+/* Footer social icons */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.footer-social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  transition: var(--transition);
+}
+.footer-social-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  color: white;
+}
+.footer-social-instagram:hover { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-color: transparent; }
+.footer-social-tiktok:hover    { background: #010101; border-color: transparent; }
+.footer-social-facebook:hover  { background: #1877F2; border-color: transparent; }
+
+@media (max-width: 1024px) {
+  .hero-social { justify-content: center; }
+}
+
+/* Redes sociales en contacto */
+.contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: white;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.contact-social-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+}
+.cs-instagram { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.cs-tiktok    { background: #010101; }
+.cs-facebook  { background: #1877F2; }
