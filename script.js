@@ -562,31 +562,25 @@ function bpAnswerInsulin(yes) {
   } else {
     document.getElementById('bp-progress-insulin').style.width = '100%';
     setTimeout(function() {
-      document.getElementById('bp-step-insulin-quiz').style.display = 'none';
-      document.getElementById('bp-step-insulin-lead').style.display = 'block';
+      document.getElementById('bp-step-insulin-quiz').style.display   = 'none';
+      document.getElementById('bp-step-insulin-result').style.display = 'block';
+      bpShowInsulinResult();
     }, 350);
   }
 }
 
-function bpRevealInsulinResult() {
-  var name = document.getElementById('bp-name-insulin').value.trim();
-  var wa   = document.getElementById('bp-wa-insulin').value.trim();
-  if (!name || !wa) { alert('Por favor ingresa tu nombre y WhatsApp para ver tu resultado.'); return; }
-
-  var risk, lvl, txt;
+function bpShowInsulinResult() {
+  var lvl, txt;
   if (bpIS >= 4) {
-    risk = 'ALTO'; lvl = 'red';
+    lvl = 'red';
     txt = 'Tu puntaje indica una <strong>alta probabilidad de resistencia a la insulina</strong>. Estos marcadores son señales tempranas que, sin atención médica, pueden progresar a prediabetes o diabetes tipo 2.';
   } else if (bpIS >= 2) {
-    risk = 'MODERADO'; lvl = 'yellow';
+    lvl = 'yellow';
     txt = 'Tu puntaje sugiere un <strong>riesgo moderado</strong>. Es importante monitorear estos indicadores con un especialista para prevenir el avance hacia resistencia insulínica establecida.';
   } else {
-    risk = 'BAJO'; lvl = 'green';
+    lvl = 'green';
     txt = 'Tu puntaje indica un <strong>riesgo bajo de resistencia a la insulina</strong>. Sigue manteniendo tus hábitos saludables. Una evaluación médica periódica es siempre recomendable.';
   }
-
-  document.getElementById('bp-step-insulin-lead').style.display   = 'none';
-  document.getElementById('bp-step-insulin-result').style.display = 'block';
 
   ['green','yellow','red'].forEach(function(c) {
     document.getElementById('bp-light-insulin-' + c).classList.remove('bp-active');
@@ -597,7 +591,7 @@ function bpRevealInsulinResult() {
   var cta = document.getElementById('bp-result-insulin-cta');
   if (lvl !== 'green') {
     cta.style.display = 'block';
-    var msg = encodeURIComponent('Hola Dra. Gabriela, termine mi test de resistencia a la insulina y mi riesgo es ' + risk + '. Me llamo ' + name + '. Quiero agendar una evaluacion en Edificio Metrocity ($60).');
+    var msg = encodeURIComponent('Hola Dra. Gabriela, termine mi test de resistencia a la insulina. Quiero agendar una evaluacion en Edificio Metrocity ($60).');
     document.getElementById('bp-wa-link-insulin').href = 'https://wa.me/593998944730?text=' + msg;
   } else {
     cta.style.display = 'none';
@@ -607,10 +601,7 @@ function bpRevealInsulinResult() {
 function bpResetInsulin() {
   bpIQ = 0; bpIS = 0;
   document.getElementById('bp-step-insulin-result').style.display = 'none';
-  document.getElementById('bp-step-insulin-lead').style.display   = 'none';
   document.getElementById('bp-step-insulin-quiz').style.display   = 'block';
-  document.getElementById('bp-name-insulin').value = '';
-  document.getElementById('bp-wa-insulin').value   = '';
   bpShowInsulinQ();
 }
 
@@ -648,22 +639,12 @@ function bpCalculateMetabolic() {
   if (document.getElementById('bp-sedentarismo').checked) penalty += 2;
   if (document.getElementById('bp-ronquidos').checked)    penalty += 2;
 
-  bpMeta = { edad: edad, sexo: sexo, imc: imc, icc: icc, ica: ica, penalty: penalty, edadMeta: edad + penalty };
-
-  document.getElementById('bp-step-meta-form').style.display = 'none';
-  document.getElementById('bp-step-meta-lead').style.display = 'block';
+  document.getElementById('bp-step-meta-form').style.display   = 'none';
+  document.getElementById('bp-step-meta-result').style.display = 'block';
+  bpShowMetabolicResult(edad, sexo, imc, icc, ica, penalty, edad + penalty);
 }
 
-function bpRevealMetabolicResult() {
-  var name = document.getElementById('bp-name-meta').value.trim();
-  var wa   = document.getElementById('bp-wa-meta').value.trim();
-  if (!name || !wa) { alert('Por favor ingresa tu nombre y WhatsApp para ver tu resultado.'); return; }
-
-  var edad = bpMeta.edad, sexo = bpMeta.sexo, imc = bpMeta.imc;
-  var icc = bpMeta.icc, ica = bpMeta.ica, penalty = bpMeta.penalty, edadMeta = bpMeta.edadMeta;
-
-  document.getElementById('bp-step-meta-lead').style.display   = 'none';
-  document.getElementById('bp-step-meta-result').style.display = 'block';
+function bpShowMetabolicResult(edad, sexo, imc, icc, ica, penalty, edadMeta) {
 
   document.getElementById('bp-edad-real-display').textContent = edad;
   document.getElementById('bp-edad-meta-display').textContent = edadMeta;
@@ -710,7 +691,7 @@ function bpRevealMetabolicResult() {
   var cta = document.getElementById('bp-result-meta-cta');
   if (lvl !== 'green') {
     cta.style.display = 'block';
-    var msg = encodeURIComponent('Hola Dra. Gabriela, termine mi test metabolico y mi riesgo es ' + risk + '. Mi edad real es ' + edad + ' años y mi edad metabolica calculada es ' + edadMeta + ' años. Me llamo ' + name + '. Quiero agendar una cita en Edificio Metrocity ($60).');
+    var msg = encodeURIComponent('Hola Dra. Gabriela, acabe mi escaneo metabolico. Quiero agendar una cita en Edificio Metrocity ($60).');
     document.getElementById('bp-wa-link-meta').href = 'https://wa.me/593998944730?text=' + msg;
   } else {
     cta.style.display = 'none';
@@ -718,11 +699,8 @@ function bpRevealMetabolicResult() {
 }
 
 function bpResetMetabolic() {
-  bpMeta = {};
   document.getElementById('bp-step-meta-result').style.display = 'none';
-  document.getElementById('bp-step-meta-lead').style.display   = 'none';
   document.getElementById('bp-step-meta-form').style.display   = 'block';
-  ['bp-name-meta','bp-wa-meta'].forEach(function(id) { document.getElementById(id).value = ''; });
   ['bp-edad','bp-peso','bp-estatura','bp-cintura','bp-cadera'].forEach(function(id) { document.getElementById(id).value = ''; });
   ['bp-tabaquismo','bp-sedentarismo','bp-ronquidos'].forEach(function(id) { document.getElementById(id).checked = false; });
 }
