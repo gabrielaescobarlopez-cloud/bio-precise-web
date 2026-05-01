@@ -515,3 +515,217 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('%cSitio web desarrollado con cuidado · Quito, Ecuador',
     'color:#5BA896;font-size:12px;');
 });
+
+/* ────────────────────────────────────────────
+   12. BIO-PRECISE™ CALCULADORAS
+──────────────────────────────────────────── */
+
+/* -- Tab switching -- */
+function bpSwitchTab(tab) {
+  const isInsulin = tab === 'insulin';
+  document.getElementById('bp-panel-insulin').style.display   = isInsulin ? 'block' : 'none';
+  document.getElementById('bp-panel-metabolic').style.display = isInsulin ? 'none'  : 'block';
+  document.getElementById('bp-tab-insulin').classList.toggle('bp-tab-active',  isInsulin);
+  document.getElementById('bp-tab-metabolic').classList.toggle('bp-tab-active', !isInsulin);
+}
+
+/* ---- COMPONENTE 1: Test de Resistencia a la Insulina ---- */
+const bpInsulinQ = [
+  { text: '¿Tienes manchas oscuras en el cuello, axilas o ingles (acantosis nigricans) o pequeñas bolitas colgantes en la piel (acrocordones)?', pts: 3 },
+  { text: '¿Tu cintura mide más de 88 cm si eres mujer, o más de 102 cm si eres hombre?', pts: 2 },
+  { text: '¿Sientes mucho sueño o cansancio después de comer?', pts: 1 },
+  { text: '¿Sientes ansiedad intensa o "necesidad urgente" de comer dulces o carbohidratos?', pts: 1 },
+  { text: '¿Te cuesta mucho bajar de peso a pesar de hacer dieta o ejercicio?', pts: 1 }
+];
+
+let bpIQ = 0;
+let bpIS = 0;
+
+function bpShowInsulinQ() {
+  const el = document.getElementById('bp-q-insulin');
+  if (!el) return;
+  el.innerHTML = '<h3>' + bpInsulinQ[bpIQ].text + '</h3>';
+  document.getElementById('bp-q-counter-insulin').textContent = 'Pregunta ' + (bpIQ + 1) + ' de ' + bpInsulinQ.length;
+  document.getElementById('bp-progress-insulin').style.width  = ((bpIQ / bpInsulinQ.length) * 100) + '%';
+}
+
+function bpAnswerInsulin(yes) {
+  if (yes) bpIS += bpInsulinQ[bpIQ].pts;
+  bpIQ++;
+  if (bpIQ < bpInsulinQ.length) {
+    var el = document.getElementById('bp-q-insulin');
+    el.style.opacity = '0';
+    setTimeout(function() {
+      bpShowInsulinQ();
+      el.style.opacity = '1';
+    }, 220);
+  } else {
+    document.getElementById('bp-progress-insulin').style.width = '100%';
+    setTimeout(function() {
+      document.getElementById('bp-step-insulin-quiz').style.display = 'none';
+      document.getElementById('bp-step-insulin-lead').style.display = 'block';
+    }, 350);
+  }
+}
+
+function bpRevealInsulinResult() {
+  var name = document.getElementById('bp-name-insulin').value.trim();
+  var wa   = document.getElementById('bp-wa-insulin').value.trim();
+  if (!name || !wa) { alert('Por favor ingresa tu nombre y WhatsApp para ver tu resultado.'); return; }
+
+  var risk, lvl, txt;
+  if (bpIS >= 4) {
+    risk = 'ALTO'; lvl = 'red';
+    txt = 'Tu puntaje indica una <strong>alta probabilidad de resistencia a la insulina</strong>. Estos marcadores son señales tempranas que, sin atención médica, pueden progresar a prediabetes o diabetes tipo 2.';
+  } else if (bpIS >= 2) {
+    risk = 'MODERADO'; lvl = 'yellow';
+    txt = 'Tu puntaje sugiere un <strong>riesgo moderado</strong>. Es importante monitorear estos indicadores con un especialista para prevenir el avance hacia resistencia insulínica establecida.';
+  } else {
+    risk = 'BAJO'; lvl = 'green';
+    txt = 'Tu puntaje indica un <strong>riesgo bajo de resistencia a la insulina</strong>. Sigue manteniendo tus hábitos saludables. Una evaluación médica periódica es siempre recomendable.';
+  }
+
+  document.getElementById('bp-step-insulin-lead').style.display   = 'none';
+  document.getElementById('bp-step-insulin-result').style.display = 'block';
+
+  ['green','yellow','red'].forEach(function(c) {
+    document.getElementById('bp-light-insulin-' + c).classList.remove('bp-active');
+  });
+  document.getElementById('bp-light-insulin-' + lvl).classList.add('bp-active');
+  document.getElementById('bp-result-insulin-text').innerHTML = txt;
+
+  var cta = document.getElementById('bp-result-insulin-cta');
+  if (lvl !== 'green') {
+    cta.style.display = 'block';
+    var msg = encodeURIComponent('Hola Dra. Gabriela, termine mi test de resistencia a la insulina y mi riesgo es ' + risk + '. Me llamo ' + name + '. Quiero agendar una evaluacion en Edificio Metrocity ($60).');
+    document.getElementById('bp-wa-link-insulin').href = 'https://wa.me/593998944730?text=' + msg;
+  } else {
+    cta.style.display = 'none';
+  }
+}
+
+function bpResetInsulin() {
+  bpIQ = 0; bpIS = 0;
+  document.getElementById('bp-step-insulin-result').style.display = 'none';
+  document.getElementById('bp-step-insulin-lead').style.display   = 'none';
+  document.getElementById('bp-step-insulin-quiz').style.display   = 'block';
+  document.getElementById('bp-name-insulin').value = '';
+  document.getElementById('bp-wa-insulin').value   = '';
+  bpShowInsulinQ();
+}
+
+/* ---- COMPONENTE 2: Escaneo de Vitalidad Metabólica ---- */
+var bpMeta = {};
+
+function bpCalculateMetabolic() {
+  var edad     = parseInt(document.getElementById('bp-edad').value);
+  var sexo     = document.getElementById('bp-sexo').value;
+  var peso     = parseFloat(document.getElementById('bp-peso').value);
+  var estatura = parseFloat(document.getElementById('bp-estatura').value);
+  var cintura  = parseFloat(document.getElementById('bp-cintura').value);
+  var cadera   = parseFloat(document.getElementById('bp-cadera').value);
+
+  if (!edad || !peso || !estatura || !cintura || !cadera ||
+      edad < 15 || edad > 90 || peso < 30 || estatura < 100 || cintura < 40 || cadera < 40) {
+    alert('Por favor completa todos los campos con valores validos.');
+    return;
+  }
+
+  var altM = estatura / 100;
+  var imc  = peso / (altM * altM);
+  var icc  = cintura / cadera;
+  var ica  = cintura / estatura;
+
+  var penalty = 0;
+  if (imc >= 30)      penalty += 3;
+  else if (imc >= 25) penalty += 1;
+
+  var iccLim = sexo === 'female' ? 0.85 : 0.94;
+  if (icc > iccLim) penalty += 3;
+  if (ica > 0.5)    penalty += 2;
+
+  if (document.getElementById('bp-tabaquismo').checked)  penalty += 3;
+  if (document.getElementById('bp-sedentarismo').checked) penalty += 2;
+  if (document.getElementById('bp-ronquidos').checked)    penalty += 2;
+
+  bpMeta = { edad: edad, sexo: sexo, imc: imc, icc: icc, ica: ica, penalty: penalty, edadMeta: edad + penalty };
+
+  document.getElementById('bp-step-meta-form').style.display = 'none';
+  document.getElementById('bp-step-meta-lead').style.display = 'block';
+}
+
+function bpRevealMetabolicResult() {
+  var name = document.getElementById('bp-name-meta').value.trim();
+  var wa   = document.getElementById('bp-wa-meta').value.trim();
+  if (!name || !wa) { alert('Por favor ingresa tu nombre y WhatsApp para ver tu resultado.'); return; }
+
+  var edad = bpMeta.edad, sexo = bpMeta.sexo, imc = bpMeta.imc;
+  var icc = bpMeta.icc, ica = bpMeta.ica, penalty = bpMeta.penalty, edadMeta = bpMeta.edadMeta;
+
+  document.getElementById('bp-step-meta-lead').style.display   = 'none';
+  document.getElementById('bp-step-meta-result').style.display = 'block';
+
+  document.getElementById('bp-edad-real-display').textContent = edad;
+  document.getElementById('bp-edad-meta-display').textContent = edadMeta;
+
+  var metaEl = document.getElementById('bp-edad-meta-display');
+  if (penalty >= 5) metaEl.classList.add('bp-danger');
+  else              metaEl.classList.remove('bp-danger');
+
+  var imcS, imcC;
+  if (imc < 18.5)    { imcS = 'Bajo peso';  imcC = 'bp-metric-warn'; }
+  else if (imc < 25) { imcS = 'Normal';     imcC = 'bp-metric-ok';   }
+  else if (imc < 30) { imcS = 'Sobrepeso';  imcC = 'bp-metric-warn'; }
+  else               { imcS = 'Obesidad';   imcC = 'bp-metric-bad';  }
+
+  var iccLim = sexo === 'female' ? 0.85 : 0.94;
+  var iccS = icc > iccLim ? 'Riesgo alto' : 'Normal';
+  var iccC = icc > iccLim ? 'bp-metric-bad' : 'bp-metric-ok';
+  var icaS = ica > 0.5 ? 'Riesgo alto' : 'Normal';
+  var icaC = ica > 0.5 ? 'bp-metric-bad' : 'bp-metric-ok';
+
+  document.getElementById('bp-metrics-grid').innerHTML =
+    '<div class="bp-metric-card"><div class="bp-metric-label">IMC</div><div class="bp-metric-value">' + imc.toFixed(1) + '</div><div class="bp-metric-status ' + imcC + '">' + imcS + '</div></div>' +
+    '<div class="bp-metric-card"><div class="bp-metric-label">ICC</div><div class="bp-metric-value">' + icc.toFixed(2) + '</div><div class="bp-metric-status ' + iccC + '">' + iccS + '</div></div>' +
+    '<div class="bp-metric-card"><div class="bp-metric-label">ICA</div><div class="bp-metric-value">' + ica.toFixed(2) + '</div><div class="bp-metric-status ' + icaC + '">' + icaS + '</div></div>';
+
+  var lvl, risk, txt;
+  if (penalty >= 5) {
+    lvl = 'red'; risk = 'ALTO';
+    txt = 'Tu edad metabolica es <strong>' + penalty + ' años mayor que tu edad real</strong>. Tu cuerpo esta envejeciendo metabolicamente mas rapido de lo esperado. Con intervencion medica adecuada, este proceso es <strong>reversible</strong>.';
+  } else if (penalty >= 2) {
+    lvl = 'yellow'; risk = 'MODERADO';
+    txt = 'Tu edad metabolica supera tu edad real en <strong>' + penalty + ' año' + (penalty > 1 ? 's' : '') + '</strong>. Existen factores de riesgo que conviene abordar con un especialista para revertir este proceso.';
+  } else {
+    lvl = 'green'; risk = 'BAJO';
+    txt = '¡Excelente! Tu edad metabolica es practicamente igual a tu edad real. Tus indicadores metabolicos estan dentro de rangos saludables. Considera una evaluacion anual de seguimiento.';
+  }
+
+  ['green','yellow','red'].forEach(function(c) {
+    document.getElementById('bp-light-meta-' + c).classList.remove('bp-active');
+  });
+  document.getElementById('bp-light-meta-' + lvl).classList.add('bp-active');
+  document.getElementById('bp-result-meta-text').innerHTML = txt;
+
+  var cta = document.getElementById('bp-result-meta-cta');
+  if (lvl !== 'green') {
+    cta.style.display = 'block';
+    var msg = encodeURIComponent('Hola Dra. Gabriela, termine mi test metabolico y mi riesgo es ' + risk + '. Mi edad real es ' + edad + ' años y mi edad metabolica calculada es ' + edadMeta + ' años. Me llamo ' + name + '. Quiero agendar una cita en Edificio Metrocity ($60).');
+    document.getElementById('bp-wa-link-meta').href = 'https://wa.me/593998944730?text=' + msg;
+  } else {
+    cta.style.display = 'none';
+  }
+}
+
+function bpResetMetabolic() {
+  bpMeta = {};
+  document.getElementById('bp-step-meta-result').style.display = 'none';
+  document.getElementById('bp-step-meta-lead').style.display   = 'none';
+  document.getElementById('bp-step-meta-form').style.display   = 'block';
+  ['bp-name-meta','bp-wa-meta'].forEach(function(id) { document.getElementById(id).value = ''; });
+  ['bp-edad','bp-peso','bp-estatura','bp-cintura','bp-cadera'].forEach(function(id) { document.getElementById(id).value = ''; });
+  ['bp-tabaquismo','bp-sedentarismo','bp-ronquidos'].forEach(function(id) { document.getElementById(id).checked = false; });
+}
+
+/* Init insulin quiz on page load */
+document.addEventListener('DOMContentLoaded', bpShowInsulinQ);

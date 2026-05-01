@@ -58,6 +58,7 @@
       <li><a href="#contacto" class="nav-link">Contacto</a></li>
       <li><a href="#resultados" class="nav-pill-mint">Resultados</a></li>
       <li><a href="#calculadora" class="nav-pill-mint">Calculadora</a></li>
+      <li><a href="#bioprecise" class="nav-pill-mint">Bio-Precise™</a></li>
       <li><a href="#opiniones" class="nav-pill-mint">Opiniones</a></li>
       <li><a href="https://wa.me/593998944730?text=Hola,%20Dra.%20Escobar.%20Me%20gustaría%20agendar%20una%20cita%20médica." class="nav-cta-btn" target="_blank" rel="noopener">Agendar Cita</a></li>
     </ul>
@@ -787,6 +788,233 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BIO-PRECISE™ CALCULADORAS ═══════════════ -->
+<section id="bioprecise" class="section bioprecise-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-tag bp-section-tag">BIO-PRECISE™</span>
+      <h2>Calculadoras de Diagnóstico Metabólico</h2>
+      <p>Descubre tu estado metabólico en 2 minutos. Herramientas clínicas diseñadas por la Dra. Gabriela Escobar.</p>
+    </div>
+
+    <div class="bp-tabs" data-aos="fade-up">
+      <button class="bp-tab bp-tab-active" id="bp-tab-insulin" onclick="bpSwitchTab('insulin')">
+        <i class="fas fa-syringe"></i>
+        <div><strong>Test Resistencia a la Insulina</strong><br><small>5 preguntas · 2 minutos</small></div>
+      </button>
+      <button class="bp-tab" id="bp-tab-metabolic" onclick="bpSwitchTab('metabolic')">
+        <i class="fas fa-dna"></i>
+        <div><strong>Escaneo de Vitalidad Metabólica</strong><br><small>Calcula tu Edad Metabólica</small></div>
+      </button>
+    </div>
+
+    <!-- ── PANEL INSULINA ── -->
+    <div class="bp-panel" id="bp-panel-insulin" data-aos="fade-up">
+
+      <!-- Paso 1: Quiz -->
+      <div class="bp-step" id="bp-step-insulin-quiz">
+        <div class="bp-quiz-header">
+          <div class="bp-progress-track">
+            <div class="bp-progress-fill" id="bp-progress-insulin" style="width:0%"></div>
+          </div>
+          <span class="bp-q-counter" id="bp-q-counter-insulin">Pregunta 1 de 5</span>
+        </div>
+        <div class="bp-question-container" id="bp-q-insulin"></div>
+        <div class="bp-options-row">
+          <button class="bp-yes-btn" onclick="bpAnswerInsulin(true)">
+            <i class="fas fa-check-circle"></i> Sí
+          </button>
+          <button class="bp-no-btn" onclick="bpAnswerInsulin(false)">
+            <i class="fas fa-times-circle"></i> No
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2: Lead capture -->
+      <div class="bp-step" id="bp-step-insulin-lead" style="display:none">
+        <div class="bp-lead-wrapper">
+          <div class="bp-analyzing-icon"><i class="fas fa-dna"></i></div>
+          <h3>Estamos analizando tus datos...</h3>
+          <p>¿A qué WhatsApp enviamos tu reporte detallado?</p>
+          <div class="bp-lead-form">
+            <input type="text" id="bp-name-insulin" placeholder="Tu nombre completo" />
+            <input type="tel" id="bp-wa-insulin" placeholder="Tu WhatsApp (0991234567)" />
+            <button class="bp-submit-btn" onclick="bpRevealInsulinResult()">
+              <i class="fas fa-unlock-alt"></i> Ver mi diagnóstico ahora
+            </button>
+            <p class="bp-lead-note"><i class="fas fa-lock"></i> Datos privados. Solo para enviarte tu reporte.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 3: Resultado -->
+      <div class="bp-step" id="bp-step-insulin-result" style="display:none">
+        <div class="bp-result-wrapper">
+          <h3 class="bp-result-heading">Tu Diagnóstico de Riesgo Insulínico</h3>
+          <div class="bp-semaphore">
+            <div class="bp-light bp-light-green" id="bp-light-insulin-green">
+              <i class="fas fa-check-circle"></i><span>Riesgo Bajo</span>
+            </div>
+            <div class="bp-light bp-light-yellow" id="bp-light-insulin-yellow">
+              <i class="fas fa-exclamation-circle"></i><span>Riesgo Medio</span>
+            </div>
+            <div class="bp-light bp-light-red" id="bp-light-insulin-red">
+              <i class="fas fa-exclamation-triangle"></i><span>Riesgo Alto</span>
+            </div>
+          </div>
+          <div class="bp-result-text" id="bp-result-insulin-text"></div>
+          <div class="bp-result-cta" id="bp-result-insulin-cta" style="display:none">
+            <p class="bp-alert-text">Tu metabolismo presenta señales de alerta. No esperes a un evento crítico.</p>
+            <a id="bp-wa-link-insulin" href="#" class="bp-cta-btn" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> Agendar Evaluación en Edificio Metrocity ($60)
+            </a>
+          </div>
+          <button class="bp-reset-btn" onclick="bpResetInsulin()">
+            <i class="fas fa-redo"></i> Repetir test
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PANEL METABÓLICO ── -->
+    <div class="bp-panel" id="bp-panel-metabolic" style="display:none" data-aos="fade-up">
+
+      <!-- Paso 1: Formulario -->
+      <div class="bp-step" id="bp-step-meta-form">
+        <h3 class="bp-form-title"><i class="fas fa-microscope"></i> Ingresa tus datos</h3>
+        <div class="bp-meta-form">
+          <div class="bp-form-row">
+            <div class="bp-form-group">
+              <label>Edad</label>
+              <div class="bp-input-unit">
+                <input type="number" id="bp-edad" placeholder="35" min="15" max="90" />
+                <span>años</span>
+              </div>
+            </div>
+            <div class="bp-form-group">
+              <label>Sexo biológico</label>
+              <select id="bp-sexo">
+                <option value="female">Femenino</option>
+                <option value="male">Masculino</option>
+              </select>
+            </div>
+          </div>
+          <div class="bp-form-row">
+            <div class="bp-form-group">
+              <label>Peso</label>
+              <div class="bp-input-unit">
+                <input type="number" id="bp-peso" placeholder="70" min="30" max="300" />
+                <span>kg</span>
+              </div>
+            </div>
+            <div class="bp-form-group">
+              <label>Estatura</label>
+              <div class="bp-input-unit">
+                <input type="number" id="bp-estatura" placeholder="165" min="100" max="250" />
+                <span>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="bp-form-row">
+            <div class="bp-form-group">
+              <label>Cintura</label>
+              <div class="bp-input-unit">
+                <input type="number" id="bp-cintura" placeholder="80" min="40" max="200" />
+                <span>cm</span>
+              </div>
+            </div>
+            <div class="bp-form-group">
+              <label>Cadera</label>
+              <div class="bp-input-unit">
+                <input type="number" id="bp-cadera" placeholder="95" min="40" max="200" />
+                <span>cm</span>
+              </div>
+            </div>
+          </div>
+          <div class="bp-checkboxes">
+            <p class="bp-checkboxes-label">Factores adicionales de riesgo:</p>
+            <label class="bp-checkbox-item">
+              <input type="checkbox" id="bp-tabaquismo" />
+              <span><i class="fas fa-smoking"></i> Fumador/a activo/a (+3 años)</span>
+            </label>
+            <label class="bp-checkbox-item">
+              <input type="checkbox" id="bp-sedentarismo" />
+              <span><i class="fas fa-couch"></i> Estilo de vida sedentario (+2 años)</span>
+            </label>
+            <label class="bp-checkbox-item">
+              <input type="checkbox" id="bp-ronquidos" />
+              <span><i class="fas fa-bed"></i> Ronquidos o apnea del sueño (+2 años)</span>
+            </label>
+          </div>
+          <button class="bp-submit-btn" onclick="bpCalculateMetabolic()">
+            <i class="fas fa-dna"></i> Calcular mi Edad Metabólica
+          </button>
+        </div>
+      </div>
+
+      <!-- Paso 2: Lead capture -->
+      <div class="bp-step" id="bp-step-meta-lead" style="display:none">
+        <div class="bp-lead-wrapper">
+          <div class="bp-analyzing-icon"><i class="fas fa-microscope"></i></div>
+          <h3>Estamos analizando tus datos...</h3>
+          <p>¿A qué WhatsApp enviamos tu reporte detallado?</p>
+          <div class="bp-lead-form">
+            <input type="text" id="bp-name-meta" placeholder="Tu nombre completo" />
+            <input type="tel" id="bp-wa-meta" placeholder="Tu WhatsApp (0991234567)" />
+            <button class="bp-submit-btn" onclick="bpRevealMetabolicResult()">
+              <i class="fas fa-unlock-alt"></i> Ver mi diagnóstico ahora
+            </button>
+            <p class="bp-lead-note"><i class="fas fa-lock"></i> Datos privados. Solo para enviarte tu reporte.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 3: Resultado -->
+      <div class="bp-step" id="bp-step-meta-result" style="display:none">
+        <div class="bp-result-wrapper">
+          <h3 class="bp-result-heading">Tu Escaneo Metabólico Completo</h3>
+          <div class="bp-metrics-grid" id="bp-metrics-grid"></div>
+          <div class="bp-age-display">
+            <div class="bp-age-real">
+              <span class="bp-age-label">Edad real</span>
+              <span class="bp-age-num" id="bp-edad-real-display">--</span>
+              <span class="bp-age-unit">años</span>
+            </div>
+            <div class="bp-age-arrow">→</div>
+            <div class="bp-age-meta">
+              <span class="bp-age-label">Edad metabólica</span>
+              <span class="bp-age-num bp-age-meta-num" id="bp-edad-meta-display">--</span>
+              <span class="bp-age-unit">años</span>
+            </div>
+          </div>
+          <div class="bp-semaphore">
+            <div class="bp-light bp-light-green" id="bp-light-meta-green">
+              <i class="fas fa-check-circle"></i><span>Óptimo</span>
+            </div>
+            <div class="bp-light bp-light-yellow" id="bp-light-meta-yellow">
+              <i class="fas fa-exclamation-circle"></i><span>Moderado</span>
+            </div>
+            <div class="bp-light bp-light-red" id="bp-light-meta-red">
+              <i class="fas fa-exclamation-triangle"></i><span>Alerta</span>
+            </div>
+          </div>
+          <div class="bp-result-text" id="bp-result-meta-text"></div>
+          <div class="bp-result-cta" id="bp-result-meta-cta" style="display:none">
+            <p class="bp-alert-text">Tu metabolismo presenta señales de alerta. No esperes a un evento crítico.</p>
+            <a id="bp-wa-link-meta" href="#" class="bp-cta-btn" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> Agendar Evaluación en Edificio Metrocity ($60)
+            </a>
+          </div>
+          <button class="bp-reset-btn" onclick="bpResetMetabolic()">
+            <i class="fas fa-redo"></i> Nuevo escaneo
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
