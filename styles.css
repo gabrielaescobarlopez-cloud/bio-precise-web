@@ -353,6 +353,20 @@ h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: .02em; text-transform
 @media (max-width: 1300px) {
   .nav-pill-mint { display: none; }
 }
+/* Pills visibles en el menú hamburguesa móvil */
+@media (max-width: 768px) {
+  .nav-pill-mint {
+    display: block !important;
+    background: rgba(91,168,150,.12);
+    border: 1px solid rgba(91,168,150,.3);
+    border-radius: var(--radius-md) !important;
+    padding: 14px 16px !important;
+    font-size: .95rem !important;
+    text-align: left;
+    width: 100%;
+    color: var(--mint-light) !important;
+  }
+}
 
 .nav-pill-mint {
   background: rgba(91,168,150,.15);
@@ -686,6 +700,25 @@ h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: .02em; text-transform
   color: var(--text-light);
 }
 .service-list i { color: var(--mint); font-size: .8rem; }
+
+.service-price-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 7px 16px;
+  background: rgba(91,168,150,.1);
+  border: 1px solid rgba(91,168,150,.28);
+  border-radius: 50px;
+  color: var(--mint);
+  font-size: .83rem;
+  font-weight: 700;
+}
+.service-card.featured .service-price-tag {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.3);
+  color: var(--mint-light);
+}
 
 /* ════════════════════════════════════════════
    PHARMACOLOGY
@@ -2873,7 +2906,7 @@ h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: .02em; text-transform
 .bp-metric-warn { color: #FFC107; }
 .bp-metric-bad  { color: #F44336; }
 
-/* Responsive */
+/* Bio-Precise responsive */
 @media (max-width: 640px) {
   .bp-panel        { padding: 1.5rem 1.2rem; }
   .bp-tabs         { flex-direction: column; align-items: center; }
@@ -2886,4 +2919,93 @@ h4 { font-size: 0.95rem; font-weight: 600; letter-spacing: .02em; text-transform
   .bp-age-num      { font-size: 2.8rem; }
   .bp-age-display  { gap: 1rem; }
   .bp-age-arrow    { font-size: 1.3rem; }
+  .bp-cta-btn      { font-size: .82rem; padding: .85rem 1.2rem; }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE GLOBAL — mejoras generales ≤ 768px
+═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Evitar desborde horizontal global */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+  .container  { padding: 0 18px; }
+  .section    { padding: 64px 0; }
+
+  /* Hero */
+  .hero-container   { padding: 48px 18px 56px; gap: 32px; }
+  .hero-badge       { font-size: .73rem; padding: 6px 12px; white-space: normal; text-align: center; }
+  .hero-sub         { font-size: .92rem; max-width: 100%; }
+  .hero-actions     { flex-direction: column; gap: 10px; }
+  .hero-actions .btn { width: 100%; justify-content: center; text-align: center; }
+  .scarcity-badge   { font-size: .75rem; }
+
+  /* Servicios */
+  .service-card { padding: 28px 22px; }
+
+  /* Farmacología */
+  .pharma-card     { padding: 28px 20px; }
+  .pharma-header   { gap: 12px; }
+  .pharma-molecule { width: 48px; height: 48px; font-size: 1.2rem; }
+  .pharma-efficacy { width: 100%; }
+
+  /* Tabla nutrición */
+  .table-wrapper         { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+  .macros-table          { min-width: 620px; font-size: .78rem; }
+  .macros-table th,
+  .macros-table td       { padding: 10px 8px; }
+
+  /* Calculadora macros */
+  .calculator-section .calc-form,
+  .calculator-section .calc-results { padding: 24px 18px; }
+
+  /* Ejercicio */
+  .exercise-card { padding: 28px 20px; }
+
+  /* Testimonios */
+  .testimonial-card { padding: 24px 18px; }
+
+  /* Blog */
+  .blog-card { padding: 24px 20px; }
+
+  /* Contacto */
+  .info-card     { padding: 28px 20px; }
+  .map-wrapper   { border-radius: 12px; }
+
+  /* Footer */
+  .footer-grid { gap: 28px; }
+
+  /* Scarcity bar en muy pequeño */
+  .scarcity-text    { font-size: .76rem; }
+  .scarcity-cta-btn { font-size: .76rem; padding: 5px 10px; }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE PEQUEÑO — ≤ 420px (teléfonos antiguos)
+═══════════════════════════════════════════════ */
+@media (max-width: 420px) {
+  .container  { padding: 0 14px; }
+  .hero-container { padding: 40px 14px 50px; }
+  .hero-actions .btn { font-size: .85rem; padding: 14px 18px; }
+  .btn-note { font-size: .7rem; }
+
+  /* Semáforo BP en pantallas muy pequeñas */
+  .bp-semaphore    { gap: 0.3rem; }
+  .bp-light        { min-width: 62px; padding: 0.6rem 0.35rem; }
+  .bp-light i      { font-size: 1.3rem; }
+  .bp-light span   { font-size: .62rem; }
+  .bp-age-num      { font-size: 2.2rem; }
+
+  /* Tabla scrollable hint */
+  .table-wrapper::after {
+    content: 'Desliza →';
+    display: block;
+    text-align: center;
+    font-size: .72rem;
+    color: rgba(0,0,0,.4);
+    padding: 6px 0;
+  }
+
+  /* Farmacología */
+  .efficacy-num { font-size: 1.4rem; }
+  .pharma-benefits { gap: 8px; }
 }
