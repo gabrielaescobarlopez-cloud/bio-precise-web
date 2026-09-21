@@ -21,6 +21,7 @@ window.addEventListener('scroll', () => {
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   navLinks.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', String(navLinks.classList.contains('open')));
   document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
 });
 
