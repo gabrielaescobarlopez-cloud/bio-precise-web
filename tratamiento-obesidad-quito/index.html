@@ -37,8 +37,8 @@
        - "alumniOf": [{"@type":"CollegeOrUniversity","name":"<UNIVERSIDAD DEL TÍTULO DE MEDICINA>"}]
        - recognizedBy del máster: {"@type":"CollegeOrUniversity","name":"<UNIVERSIDAD DEL MÁSTER>"}
        - "memberOf": [{"@type":"MedicalOrganization","name":"<SOCIEDAD / ASOCIACIÓN>"}] -->
-  <!-- TODO (reseñas): cuando exista el enlace real de reseñas de Google Business, añadir al nodo
-       "#consultorio" del JSON-LD (solo con datos reales y verificables, nunca inventados):
+  <!-- PENDIENTE (reseñas): aggregateRating se deja DESACTIVADO a propósito. Enlace de reseñas: https://g.page/r/CRtSFnWoXdwcEBM/review
+       Para activarlo, añadir al nodo "#consultorio" del JSON-LD (solo con datos reales y verificables de Google, nunca inventados):
        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "X.X", "reviewCount": "N", "bestRating": "5"}
        Nota: Google no muestra estrellas para reseñas "propias" de LocalBusiness, pero el dato sigue siendo útil para IA. -->
   <script type="application/ld+json">
@@ -68,7 +68,7 @@
       "image": "https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg",
       "logo": "https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg",
       "telephone": "+593998944730",
-      "email": "dra.gabrielaescobar@gmail.com",
+      "email": "doctoragabrielaescobar@gmail.com",
       "priceRange": "$50–$60 USD",
       "currenciesAccepted": "USD",
       "isAcceptingNewPatients": true,
@@ -170,7 +170,12 @@
         "https://www.instagram.com/dra.gabriela.escobar/",
         "https://www.tiktok.com/@dra.gabriela.escobar",
         "https://www.facebook.com/profile.php?id=61577849005221"
-      ]
+      ],
+      "potentialAction": {
+        "@type": "ReviewAction",
+        "name": "Dejar una reseña en Google",
+        "target": "https://g.page/r/CRtSFnWoXdwcEBM/review"
+      }
     },
     {
       "@type": "Person",
@@ -181,7 +186,7 @@
       "description": "Médica especialista en obesidad, diabetes y salud metabólica en Quito, Ecuador, con Máster en Obesidad y Enfermedades Metabólicas.",
       "image": "https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg",
       "url": "https://dragabrielaescobar.com/sobre-mi/",
-      "email": "dra.gabrielaescobar@gmail.com",
+      "email": "doctoragabrielaescobar@gmail.com",
       "telephone": "+593998944730",
       "worksFor": {
         "@id": "https://dragabrielaescobar.com/#consultorio"
@@ -490,7 +495,7 @@
         <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query=Edificio+Metrocity+Quito+Ecuador" target="_blank" rel="noopener">Edificio Metrocity, Quito, Ecuador</a></li>
         <li><i class="fas fa-clock" aria-hidden="true"></i> Lunes a Viernes, 9:00–18:00</li>
         <li><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://wa.me/593998944730" target="_blank" rel="noopener">+593 99 894 4730</a></li>
-        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:dra.gabrielaescobar@gmail.com">dra.gabrielaescobar@gmail.com</a></li>
+        <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:doctoragabrielaescobar@gmail.com">doctoragabrielaescobar@gmail.com</a></li>
       </ul>
       <a href="https://wa.me/593998944730?text=Hola,%20Dra.%20Escobar.%20Me%20gustar%C3%ADa%20agendar%20una%20cita%20m%C3%A9dica." class="btn btn-primary btn-full" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> Agendar por WhatsApp</a>
     </div>
@@ -635,7 +640,7 @@
           <p><i class="fas fa-user-doctor" aria-hidden="true"></i> <strong>Dra. Gabriela Escobar</strong><br/>Médica especialista en Obesidad, Diabetes y Salud Metabólica</p>
           <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query=Edificio+Metrocity+Quito+Ecuador" target="_blank" rel="noopener">Edificio Metrocity, Quito, Ecuador</a></p>
           <p><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://wa.me/593998944730" target="_blank" rel="noopener">+593 99 894 4730</a></p>
-          <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:dra.gabrielaescobar@gmail.com">dra.gabrielaescobar@gmail.com</a></p>
+          <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:doctoragabrielaescobar@gmail.com">doctoragabrielaescobar@gmail.com</a></p>
           <p><i class="fas fa-clock" aria-hidden="true"></i> Lunes a Viernes, 9:00–18:00</p>
         </address>
       </div>

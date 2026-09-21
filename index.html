@@ -37,8 +37,8 @@
        - "alumniOf": [{"@type":"CollegeOrUniversity","name":"<UNIVERSIDAD DEL TÍTULO DE MEDICINA>"}]
        - recognizedBy del máster: {"@type":"CollegeOrUniversity","name":"<UNIVERSIDAD DEL MÁSTER>"}
        - "memberOf": [{"@type":"MedicalOrganization","name":"<SOCIEDAD / ASOCIACIÓN>"}] -->
-  <!-- TODO (reseñas): cuando exista el enlace real de reseñas de Google Business, añadir al nodo
-       "#consultorio" del JSON-LD (solo con datos reales y verificables, nunca inventados):
+  <!-- PENDIENTE (reseñas): aggregateRating se deja DESACTIVADO a propósito. Enlace de reseñas: https://g.page/r/CRtSFnWoXdwcEBM/review
+       Para activarlo, añadir al nodo "#consultorio" del JSON-LD (solo con datos reales y verificables de Google, nunca inventados):
        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "X.X", "reviewCount": "N", "bestRating": "5"}
        Nota: Google no muestra estrellas para reseñas "propias" de LocalBusiness, pero el dato sigue siendo útil para IA. -->
   <script type="application/ld+json">
@@ -68,7 +68,7 @@
       "image": "https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg",
       "logo": "https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg",
       "telephone": "+593998944730",
-      "email": "dra.gabrielaescobar@gmail.com",
+      "email": "doctoragabrielaescobar@gmail.com",
       "priceRange": "$50–$60 USD",
       "currenciesAccepted": "USD",
       "isAcceptingNewPatients": true,
@@ -170,7 +170,12 @@
         "https://www.instagram.com/dra.gabriela.escobar/",
         "https://www.tiktok.com/@dra.gabriela.escobar",
         "https://www.facebook.com/profile.php?id=61577849005221"
-      ]
+      ],
+      "potentialAction": {
+        "@type": "ReviewAction",
+        "name": "Dejar una reseña en Google",
+        "target": "https://g.page/r/CRtSFnWoXdwcEBM/review"
+      }
     },
     {
       "@type": "Person",
@@ -181,7 +186,7 @@
       "description": "Médica especialista en obesidad, diabetes y salud metabólica en Quito, Ecuador, con Máster en Obesidad y Enfermedades Metabólicas.",
       "image": "https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg",
       "url": "https://dragabrielaescobar.com/sobre-mi/",
-      "email": "dra.gabrielaescobar@gmail.com",
+      "email": "doctoragabrielaescobar@gmail.com",
       "telephone": "+593998944730",
       "worksFor": {
         "@id": "https://dragabrielaescobar.com/#consultorio"
@@ -1634,8 +1639,7 @@
         <h3>Déjanos tu reseña en Google</h3>
         <p>Tu testimonio es el mayor reconocimiento a nuestro trabajo. Toma solo 2 minutos y ayuda a cientos de pacientes a tomar la mejor decisión para su salud.</p>
       </div>
-      <!-- TODO (reseñas): reemplazar href por el enlace DIRECTO para dejar reseña de Google Business (formato https://g.page/r/XXXX/review o https://search.google.com/local/writereview?placeid=XXXX). Mientras tanto apunta a la ficha en Google Maps. -->
-      <a href="https://www.google.com/maps/search/?api=1&query=Dra.+Gabriela+Escobar+Edificio+Metrocity+Quito" class="btn btn-opinion js-review-link" target="_blank" rel="noopener">
+      <a href="https://g.page/r/CRtSFnWoXdwcEBM/review" class="btn btn-opinion js-review-link" target="_blank" rel="noopener">
         <i class="fab fa-google"></i>
         Déjanos tu opinión
         <i class="fas fa-arrow-right"></i>
@@ -1658,8 +1662,7 @@
     </div>
     <div class="review-cta" data-aos="fade-up">
       <p><strong>¿Ya eres paciente?</strong> Deja tu reseña en Google: toma menos de 2 minutos y ayuda a otras personas en Quito a encontrar atención médica para la obesidad y la diabetes.</p>
-      <!-- TODO (reseñas): reemplazar href por el enlace DIRECTO para dejar reseña de Google Business (formato https://g.page/r/XXXX/review o https://search.google.com/local/writereview?placeid=XXXX). Mientras tanto apunta a la ficha en Google Maps. -->
-      <a href="https://www.google.com/maps/search/?api=1&query=Dra.+Gabriela+Escobar+Edificio+Metrocity+Quito" class="btn btn-opinion js-review-link" target="_blank" rel="noopener">
+      <a href="https://g.page/r/CRtSFnWoXdwcEBM/review" class="btn btn-opinion js-review-link" target="_blank" rel="noopener">
         <i class="fab fa-google" aria-hidden="true"></i> Escribir mi reseña <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
@@ -1749,7 +1752,7 @@
             <i class="fas fa-paper-plane"></i> Enviar solicitud
           </button>
           <p class="form-footer">
-            <i class="fas fa-lock"></i> Información confidencial protegida. Al enviar aceptas la <a href="/politica-de-privacidad/">Política de Privacidad</a>. <span class="req">*</span> Campos obligatorios.
+            <i class="fas fa-lock"></i> <span>Información confidencial protegida. Al enviar aceptas la <a href="/politica-de-privacidad/" style="text-decoration:underline">Política de Privacidad</a>. <span class="req">*</span> Campos obligatorios.</span>
           </p>
         </form>
         <div id="formSuccess" class="form-success" style="display:none">
@@ -1787,7 +1790,7 @@
             <div class="info-icon"><i class="fas fa-envelope"></i></div>
             <div>
               <strong>Correo electrónico</strong>
-              <p><a href="mailto:dra.gabrielaescobar@gmail.com">dra.gabrielaescobar@gmail.com</a></p>
+              <p><a href="mailto:doctoragabrielaescobar@gmail.com">doctoragabrielaescobar@gmail.com</a></p>
             </div>
           </div>
           <div class="info-item">
@@ -1834,8 +1837,7 @@
         </div>
         <div class="contact-review">
           <p><i class="fab fa-google" aria-hidden="true"></i> <strong>¿Ya te atendiste con la Dra. Escobar?</strong> Tu reseña en Google ayuda a otros pacientes a decidir.</p>
-          <!-- TODO (reseñas): reemplazar href por el enlace DIRECTO para dejar reseña de Google Business (formato https://g.page/r/XXXX/review o https://search.google.com/local/writereview?placeid=XXXX). Mientras tanto apunta a la ficha en Google Maps. -->
-          <a href="https://www.google.com/maps/search/?api=1&query=Dra.+Gabriela+Escobar+Edificio+Metrocity+Quito" class="btn btn-primary js-review-link" target="_blank" rel="noopener"><i class="fab fa-google" aria-hidden="true"></i> Dejar reseña en Google</a>
+          <a href="https://g.page/r/CRtSFnWoXdwcEBM/review" class="btn btn-primary js-review-link" target="_blank" rel="noopener"><i class="fab fa-google" aria-hidden="true"></i> Dejar reseña en Google</a>
         </div>
       </div>
     </div>
@@ -1895,7 +1897,7 @@
           <p><i class="fas fa-user-doctor" aria-hidden="true"></i> <strong>Dra. Gabriela Escobar</strong><br/>Médica especialista en Obesidad, Diabetes y Salud Metabólica</p>
           <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <a href="https://www.google.com/maps/search/?api=1&query=Edificio+Metrocity+Quito+Ecuador" target="_blank" rel="noopener">Edificio Metrocity, Quito, Ecuador</a></p>
           <p><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://wa.me/593998944730" target="_blank" rel="noopener">+593 99 894 4730</a></p>
-          <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:dra.gabrielaescobar@gmail.com">dra.gabrielaescobar@gmail.com</a></p>
+          <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:doctoragabrielaescobar@gmail.com">doctoragabrielaescobar@gmail.com</a></p>
           <p><i class="fas fa-clock" aria-hidden="true"></i> Lunes a Viernes, 9:00–18:00</p>
         </address>
       </div>
