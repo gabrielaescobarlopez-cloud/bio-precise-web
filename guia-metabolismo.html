@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía: Los 3 análisis que pido sí o sí · Dra. Gabriela Escobar</title>
+  <meta name="description" content="Descarga gratuita: los 3 análisis de laboratorio que la Dra. Gabriela Escobar pide en toda evaluación metabólica. Aprende a interpretar insulina en ayunas, HOMA-IR y HbA1c." />
+  <link rel="canonical" href="https://dragabrielaescobar.com/guia-metabolismo" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Dra. Gabriela Escobar" />
+  <meta name="theme-color" content="#0D2847" />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="es_EC" />
+  <meta property="og:site_name" content="Dra. Gabriela Escobar" />
+  <meta property="og:title" content="Los 3 análisis que pido sí o sí · Dra. Gabriela Escobar" />
+  <meta property="og:description" content="Aprende a interpretar insulina en ayunas, HOMA-IR y HbA1c. Guía gratuita de medicina metabólica de precisión." />
+  <meta property="og:url" content="https://dragabrielaescobar.com/guia-metabolismo" />
+  <meta property="og:image" content="https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Los 3 análisis que pido sí o sí · Dra. Gabriela Escobar" />
+  <meta name="twitter:description" content="Insulina en ayunas, HOMA-IR y HbA1c: cómo interpretarlos y qué significan para tu metabolismo." />
+  <meta name="twitter:image" content="https://dragabrielaescobar.com/assets/img/dra-gabriela-escobar.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:        #0D2847;
+      --navy-mid:    #1A3D6B;
+      --navy-light:  #2C5F8A;
+      --mint:        #5BA896;
+      --mint-light:  #A8D5C8;
+      --mint-pale:   #E8F5F2;
+      --white:       #FFFFFF;
+      --gray-50:     #F8FAFC;
+      --gray-100:    #F0F4F8;
+      --gray-200:    #DDE4EE;
+      --gray-600:    #576881;
+      --text:        #1A2E44;
+      --text-light:  #5C7080;
+      --shadow-sm:   0 1px 4px rgba(13,40,71,.07);
+      --shadow-md:   0 4px 16px rgba(13,40,71,.10);
+      --shadow-lg:   0 8px 32px rgba(13,40,71,.14);
+      --radius-sm:   8px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --font-sans:   'Inter', system-ui, -apple-system, sans-serif;
+      --font-serif:  'Playfair Display', Georgia, serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,40,71,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--mint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .logo-name { font-weight: 600; font-size: .95rem; display: block; }
+    .logo-sub  { font-size: .7rem; opacity: .65; display: block; }
+    .nav-cta {
+      background: var(--mint);
+      color: var(--white);
+      text-decoration: none;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: .2s;
+    }
+    .nav-cta:hover { background: #4a9282; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a4a5e 100%);
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(91,168,150,.18) 0%, transparent 60%);
+    }
+    .hero-inner { max-width: 700px; margin: 0 auto; position: relative; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(91,168,150,.18);
+      border: 1px solid rgba(91,168,150,.35);
+      color: var(--mint-light);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 5vw, 2.9rem);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--mint-light);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.75);
+      max-width: 560px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+    .hero-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--mint);
+      object-fit: cover;
+      background: var(--navy-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mint-light);
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .author-info { text-align: left; }
+    .author-name { color: var(--white); font-weight: 600; font-size: .95rem; }
+    .author-cred { color: rgba(255,255,255,.55); font-size: .8rem; }
+
+    /* ── MAIN CONTENT ── */
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      background: var(--mint-pale);
+      border-left: 4px solid var(--mint);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 20px 24px;
+      margin: 40px 0 48px;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .intro-strip strong { color: var(--navy); }
+
+    /* ── ANALYSIS CARDS ── */
+    .analysis-num {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 6px;
+    }
+    .analysis-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 36px;
+      overflow: hidden;
+    }
+    .card-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(91,168,150,.2);
+      border: 1px solid rgba(91,168,150,.3);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--mint-light);
+      flex-shrink: 0;
+    }
+    .card-title-wrap { flex: 1; }
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .card-subtitle { color: rgba(255,255,255,.6); font-size: .88rem; }
+    .card-body { padding: 28px 32px; }
+
+    /* VALUE BOX */
+    .value-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--mint-pale);
+      border: 1px solid var(--mint-light);
+      border-radius: var(--radius-sm);
+      padding: 10px 18px;
+      margin-bottom: 20px;
+    }
+    .value-box .vb-label { font-size: .78rem; color: var(--text-light); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+    .value-box .vb-val   { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+    .value-box .vb-sep   { color: var(--mint-light); }
+
+    /* WHY ROW */
+    .why-row { margin-bottom: 20px; }
+    .why-label {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--mint);
+      margin-bottom: 6px;
+    }
+    .why-text { font-size: .97rem; color: var(--text); line-height: 1.65; }
+
+    /* FORMULA BOX */
+    .formula-box {
+      background: var(--navy);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .formula-box .f-label { font-size: .72rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .formula-box .f-eq   { font-size: 1.05rem; color: var(--white); font-weight: 600; }
+    .formula-box .f-eq em { color: var(--mint-light); font-style: normal; }
+
+    /* INTERPRETATION TABLE */
+    .interp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: .9rem;
+    }
+    .interp-table th {
+      background: var(--navy);
+      color: rgba(255,255,255,.75);
+      font-weight: 600;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    .interp-table td { padding: 11px 14px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+    .interp-table tr:last-child td { border-bottom: none; }
+    .interp-table tr:nth-child(even) td { background: var(--gray-50); }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: .75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-green  { background: #d1fae5; color: #065f46; }
+    .badge-yellow { background: #fef9c3; color: #854d0e; }
+    .badge-orange { background: #ffedd5; color: #9a3412; }
+    .badge-red    { background: #fee2e2; color: #991b1b; }
+
+    /* DOCTOR NOTE */
+    .doctor-note {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e8f5f2 100%);
+      border: 1px solid rgba(91,168,150,.25);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      font-size: .9rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .doctor-note .dn-icon { font-size: 1.2rem; color: var(--mint); flex-shrink: 0; margin-top: 2px; }
+    .doctor-note strong { color: var(--navy); }
+
+    /* ── STEPS SECTION ── */
+    .steps-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      margin: 48px 0;
+    }
+    .steps-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .steps-subtitle { text-align: center; color: rgba(255,255,255,.6); font-size: .9rem; margin-bottom: 32px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .step-item {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-md);
+      padding: 22px 20px;
+      text-align: center;
+    }
+    .step-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--mint);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .step-title { color: var(--white); font-weight: 600; font-size: .95rem; margin-bottom: 6px; }
+    .step-desc  { color: rgba(255,255,255,.6); font-size: .83rem; line-height: 1.55; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center;
+      padding: 48px 24px;
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      margin-top: 48px;
+    }
+    .cta-section h2 {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .cta-section p { color: var(--text-light); font-size: 1rem; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--mint);
+      color: var(--white);
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 6px 24px rgba(91,168,150,.35);
+      transition: .25s;
+      margin-bottom: 12px;
+    }
+    .cta-btn:hover { background: #4a9282; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(91,168,150,.45); }
+    .cta-sub { font-size: .82rem; color: var(--text-light); margin-top: 10px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: .82rem;
+      line-height: 1.6;
+    }
+    footer a { color: var(--mint-light); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 32px 0;
+      font-size: .85rem;
+      color: #5d4037;
+      display: flex;
+      gap: 10px;
+      line-height: 1.6;
+    }
+    .disclaimer i { color: #f59e0b; flex-shrink: 0; margin-top: 2px; }
+
+    @media (max-width: 600px) {
+      .card-header { padding: 22px 20px; gap: 14px; }
+      .card-body   { padding: 22px 20px; }
+      .card-title  { font-size: 1.25rem; }
+      .steps-section { padding: 28px 20px; }
+      .cta-section { padding: 36px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="https://dragabrielaescobar.com" class="nav-logo" aria-label="Inicio">
+      <span class="logo-icon"><i class="fas fa-heartbeat" aria-hidden="true"></i></span>
+      <div>
+        <span class="logo-name">Dra. Gabriela Escobar</span>
+        <span class="logo-sub">Obesidad · Diabetes · Metabolismo</span>
+      </div>
+    </a>
+    <a href="https://wa.me/593998944730?text=Hola%2C%20vi%20la%20gu%C3%ADa%20de%20an%C3%A1lisis%20y%20quiero%20agendar%20una%20consulta" class="nav-cta" target="_blank" rel="noopener">
+      Agendar consulta
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <i class="fas fa-flask" aria-hidden="true"></i>
+      Guía gratuita · BIO-PRECISE™
+    </div>
+    <h1>Los 3 análisis que pido<br><em>sí o sí</em> en toda consulta</h1>
+    <p class="hero-desc">
+      Si tu glucosa es "normal" pero tienes cansancio, dificultad para bajar de peso o antojos descontrolados,
+      estos tres valores te van a dar la respuesta que llevas tiempo buscando.
+    </p>
+    <div class="hero-author">
+      <div class="author-avatar">
+        <i class="fas fa-user-md" aria-hidden="true"></i>
+      </div>
+      <div class="author-info">
+        <span class="author-name">Dra. Gabriela Escobar</span>
+        <span class="author-cred">Médica especialista en obesidad, diabetes y medicina de precisión · Quito</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="content">
+
+  <div class="intro-strip">
+    Estos tres análisis son el <strong>punto de partida de cualquier evaluación metabólica real</strong>.
+    No sirve solo revisar la glucosa en ayunas: puedes tenerla "normal" y aun así estar desarrollando
+    resistencia a la insulina desde hace años. Aquí te explico qué pedir, por qué, y cómo interpretar cada resultado.
+  </div>
+
+  <div class="disclaimer">
+    <i class="fas fa-exclamation-triangle"></i>
+    <span>Esta guía es de carácter educativo. Los rangos de referencia son orientativos y deben interpretarse
+    junto a tu historia clínica. No reemplaza una evaluación médica personalizada.</span>
+  </div>
+
+  <!-- ── ANÁLISIS 1 ── -->
+  <div class="analysis-card">
+    <div class="card-header">
+      <div class="card-icon"><i class="fas fa-vial" aria-hidden="true"></i></div>
+      <div class="card-title-wrap">
+        <div class="analysis-num">Análisis 01</div>
+        <h2 class="card-title">Insulina en ayunas</h2>
+        <div class="card-subtitle">Muestra cuánto trabaja tu páncreas para mantener la glucosa estable</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="value-box">
+        <span class="vb-label">Valor óptimo</span>
+        <span class="vb-sep">→</span>
+        <span class="vb-val">&lt; 8 uUI/mL</span>
+      </div>
+
+      <div class="why-row">
+        <div class="why-label">¿Por qué lo pido?</div>
+        <div class="why-text">
+          La insulina es la hormona que "abre la puerta" a tus células para que entre la glucosa.
+          Cuando hay resistencia a la insulina, el páncreas compensa produciendo <em>más</em> insulina
+          para hacer el mismo trabajo. Tu glucosa puede seguir normal… pero la insulina ya está elevada.
+          Este análisis detecta ese problema <strong>años antes</strong> de que aparezca la diabetes.
+        </div>
+      </div>
+
+      <table class="interp-table">
+        <thead>
+          <tr>
+            <th>Resultado</th>
+            <th>Interpretación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-green">&lt; 8 uUI/mL</span></td>
+            <td>Óptimo — sensibilidad a la insulina normal</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-yellow">8–12 uUI/mL</span></td>
+            <td>Zona de alerta — puede indicar inicio de resistencia</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">12–20 uUI/mL</span></td>
+            <td>Resistencia a la insulina probable — requiere evaluación</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">&gt; 20 uUI/mL</span></td>
+            <td>Resistencia a la insulina significativa — acción necesaria</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doctor-note">
+        <i class="fas fa-lightbulb dn-icon" aria-hidden="true"></i>
+        <div>
+          <strong>Nota clínica:</strong> Muchos laboratorios marcan como "normal" hasta 25 uUI/mL.
+          Desde la perspectiva de medicina de precisión, <strong>por encima de 8–10 ya hay señales de alerta</strong>
+          que vale la pena investigar. No te guíes solo por el rango del laboratorio.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ANÁLISIS 2 ── -->
+  <div class="analysis-card">
+    <div class="card-header">
+      <div class="card-icon"><i class="fas fa-calculator" aria-hidden="true"></i></div>
+      <div class="card-title-wrap">
+        <div class="analysis-num">Análisis 02</div>
+        <h2 class="card-title">Índice HOMA-IR</h2>
+        <div class="card-subtitle">Calcula el grado de resistencia a la insulina combinando glucosa e insulina</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="value-box">
+        <span class="vb-label">Valor óptimo</span>
+        <span class="vb-sep">→</span>
+        <span class="vb-val">&lt; 2.0</span>
+      </div>
+
+      <div class="why-row">
+        <div class="why-label">¿Por qué lo pido?</div>
+        <div class="why-text">
+          El HOMA-IR no es un análisis de laboratorio por sí solo — es un <strong>índice que se calcula</strong>
+          con los valores de insulina y glucosa en ayunas. Cuantifica exactamente cuánta resistencia a la insulina
+          tienes. Es el marcador más usado en investigación metabólica y te da un número concreto
+          para seguir tu evolución en el tiempo.
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="f-label">Fórmula de cálculo</div>
+        <div class="f-eq">
+          HOMA-IR = <em>Insulina (uUI/mL)</em> × <em>Glucosa (mg/dL)</em> ÷ <em>405</em>
+        </div>
+      </div>
+
+      <table class="interp-table">
+        <thead>
+          <tr>
+            <th>HOMA-IR</th>
+            <th>Interpretación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-green">&lt; 2.0</span></td>
+            <td>Normal — buena sensibilidad a la insulina</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-yellow">2.0 – 2.9</span></td>
+            <td>Resistencia leve — momento ideal para intervenir</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">3.0 – 4.9</span></td>
+            <td>Resistencia moderada — requiere plan terapéutico</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">≥ 5.0</span></td>
+            <td>Resistencia severa — riesgo metabólico alto</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doctor-note">
+        <i class="fas fa-lightbulb dn-icon" aria-hidden="true"></i>
+        <div>
+          <strong>Ejemplo práctico:</strong> Insulina = 12 uUI/mL, Glucosa = 95 mg/dL
+          → HOMA-IR = (12 × 95) ÷ 405 = <strong>2.8</strong> → resistencia leve. La glucosa sola
+          no hubiera dado ninguna señal de alerta. Por eso el HOMA-IR es tan valioso.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ANÁLISIS 3 ── -->
+  <div class="analysis-card">
+    <div class="card-header">
+      <div class="card-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+      <div class="card-title-wrap">
+        <div class="analysis-num">Análisis 03</div>
+        <h2 class="card-title">Hemoglobina Glicosilada (HbA1c)</h2>
+        <div class="card-subtitle">El promedio de tu glucosa en los últimos 3 meses</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="value-box">
+        <span class="vb-label">Valor óptimo</span>
+        <span class="vb-sep">→</span>
+        <span class="vb-val">&lt; 5.5%</span>
+      </div>
+
+      <div class="why-row">
+        <div class="why-label">¿Por qué lo pido?</div>
+        <div class="why-text">
+          A diferencia de la glucosa en ayunas (que muestra solo ese momento), la HbA1c refleja cómo
+          ha estado tu glucosa en <strong>los últimos 90 días</strong>. Es como el promedio de tus notas
+          del trimestre. Puedes llegar al laboratorio con la glucosa normal (porque comiste bien ese día)
+          pero la HbA1c revela lo que ha pasado de verdad en los últimos tres meses.
+        </div>
+      </div>
+
+      <table class="interp-table">
+        <thead>
+          <tr>
+            <th>HbA1c</th>
+            <th>Interpretación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-green">&lt; 5.5%</span></td>
+            <td>Óptimo — metabolismo de glucosa saludable</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-yellow">5.5% – 5.6%</span></td>
+            <td>Zona de atención — monitoreo recomendado</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">5.7% – 6.4%</span></td>
+            <td>Prediabetes — intervención necesaria</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">≥ 6.5%</span></td>
+            <td>Diabetes — diagnóstico y tratamiento inmediatos</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="doctor-note">
+        <i class="fas fa-lightbulb dn-icon" aria-hidden="true"></i>
+        <div>
+          <strong>Importante:</strong> Muchos laboratorios marcan "normal" hasta 5.6%. Desde mi práctica clínica,
+          <strong>por encima de 5.5% ya empiezo a intervenir</strong>, especialmente si la insulina
+          y el HOMA-IR también están elevados. Los tres análisis juntos cuentan la historia completa.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASOS -->
+  <div class="steps-section">
+    <h2 class="steps-title">¿Tienes los resultados? Estos son tus próximos pasos</h2>
+    <p class="steps-subtitle">Lo que hago con mis pacientes una vez que tenemos estos tres valores</p>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-title">Pide los 3 análisis</div>
+        <div class="step-desc">En cualquier laboratorio clínico en ayunas de 8–10 horas. Pide específicamente insulina en ayunas, no solo glucosa.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-title">Calcula tu HOMA-IR</div>
+        <div class="step-desc">Usa la fórmula: (Insulina × Glucosa) ÷ 405. Con los valores en mano, el cálculo es inmediato.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-title">Interpreta con contexto</div>
+        <div class="step-desc">Un valor alterado no es un diagnóstico; es una señal. Necesita evaluarse junto a tu historia clínica completa.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-title">Agenda tu evaluación</div>
+        <div class="step-desc">Trae tus resultados a la consulta. Juntos diseñamos un plan de tratamiento basado en tu biología específica.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>¿Tienes tus resultados y no sabes cómo interpretarlos?</h2>
+    <p>En la consulta analizamos tus tres valores en contexto, encontramos la causa raíz y diseñamos un plan de acción personalizado.</p>
+    <a href="https://wa.me/593998944730?text=Hola%2C%20tengo%20mis%20resultados%20de%20metabolismo%20y%20quiero%20una%20consulta" class="cta-btn" target="_blank" rel="noopener">
+      <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      Agendar consulta por WhatsApp
+    </a>
+    <p class="cta-sub">📍 Presencial en Edificio Metrocity, Quito &nbsp;·&nbsp; 💻 Consulta virtual disponible</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <strong style="color:rgba(255,255,255,.8)">Dra. Gabriela Escobar</strong> · BIO-PRECISE™<br>
+    Especialista en obesidad, diabetes y medicina metabólica de precisión · Quito, Ecuador<br>
+    <a href="https://dragabrielaescobar.com">dragabrielaescobar.com</a> &nbsp;·&nbsp;
+    <a href="https://instagram.com/dra.gabriela.escobar" target="_blank" rel="noopener">@dra.gabriela.escobar</a>
+  </p>
+  <p style="margin-top:12px; font-size:.77rem; opacity:.5;">
+    Esta guía tiene fines educativos y no reemplaza la consulta médica. © 2024 Dra. Gabriela Escobar.
+  </p>
+</footer>
+
+</body>
+</html>
