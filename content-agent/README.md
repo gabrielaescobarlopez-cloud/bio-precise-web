@@ -64,8 +64,7 @@ python agent.py "Resistencia a la insulina: la causa silenciosa del sobrepeso"
 ## Telegram Bot
 
 - Bot: @bioprecise_content_bot
-- Martín chat_id: 7748141218
-- Gabriela chat_id: 9050271109
+- Chat IDs configurados en `.env` (ver `.env.example`)
 
 ## Notas
 
