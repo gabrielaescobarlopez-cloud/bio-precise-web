@@ -30,14 +30,21 @@ cp .env.example .env
 ```
 
 3. Cargar variables:
-```bash
-# Windows (PowerShell)
+```powershell
+# Windows (PowerShell) — ejecutar antes de cada sesión
 $env:ANTHROPIC_API_KEY="sk-ant-..."
+$env:TELEGRAM_TOKEN="..."
+$env:CHAT_ID_MARTIN="7748141218"
+$env:CHAT_ID_GABRIELA="9050271109"
 $env:WINDSOR_API_KEY="..."
+$env:INSTAGRAM_ACCOUNT_ID="17841443626145377"
+$env:CANVA_API_TOKEN="..."   # Ver sección Canva API más abajo
+```
 
+```bash
 # Linux/Mac
 export ANTHROPIC_API_KEY="sk-ant-..."
-export WINDSOR_API_KEY="..."
+export CANVA_API_TOKEN="..."
 ```
 
 ## Uso
@@ -66,8 +73,20 @@ python agent.py "Resistencia a la insulina: la causa silenciosa del sobrepeso"
 - Bot: @bioprecise_content_bot
 - Chat IDs configurados en `.env` (ver `.env.example`)
 
+## Canva API — Imágenes profesionales
+
+El agente genera imágenes usando el diseño base de Canva `DAHbl3rVzzQ` ("Señales de insulina").
+
+**Obtener CANVA_API_TOKEN:**
+1. Ir a https://www.canva.com/settings/apps
+2. Canva Connect → Personal Access Token
+3. Crear token con permisos: `design:content:read`, `design:content:write`, `design:meta:read`, `asset:read`
+
+**Fallback:** Si Canva no está disponible, el agente usa imágenes básicas (Pillow).
+
 ## Notas
 
 - El agente espera hasta 24h por cada aprobación
 - Si Martín o Gabriela solicitan cambios, el agente aborta y notifica
-- Para publicar imágenes reales, integrar con Canva MCP para exportar las slides
+- Diseño base Canva: `DAHbl3rVzzQ` — 8 páginas BIO-PRECISE™
+- El agente copia el diseño, edita el texto y exporta como PNG para cada carrusel

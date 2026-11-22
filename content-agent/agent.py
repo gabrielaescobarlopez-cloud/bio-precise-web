@@ -19,12 +19,21 @@ import requests
 import anthropic
 from datetime import datetime
 
-# Generador de imágenes (opcional — requiere Pillow)
+# Generador de imágenes con Canva API (preferido — diseños profesionales)
 try:
-    from carousel_generator import generar_imagenes_carrusel, LAYOUT_NAMES
-    IMAGENES_DISPONIBLES = True
+    from canva_carousel import generar_carrusel_canva
+    CANVA_DISPONIBLE = True
 except ImportError:
-    IMAGENES_DISPONIBLES = False
+    CANVA_DISPONIBLE = False
+
+# Fallback: generador Pillow (básico, sin dependencias externas)
+try:
+    from carousel_generator import generar_imagenes_carrusel
+    PILLOW_DISPONIBLE = True
+except ImportError:
+    PILLOW_DISPONIBLE = False
+
+IMAGENES_DISPONIBLES = CANVA_DISPONIBLE or PILLOW_DISPONIBLE
 
 # ─── Configuración ────────────────────────────────────────────────────────────
 # Todos los valores sensibles vienen de variables de entorno
@@ -35,6 +44,9 @@ CHAT_ID_GABRIELA = int(os.environ.get("CHAT_ID_GABRIELA", "0"))
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 WINDSOR_API_KEY = os.environ.get("WINDSOR_API_KEY", "")
 INSTAGRAM_ACCOUNT_ID = os.environ.get("INSTAGRAM_ACCOUNT_ID", "")
+# Canva API — necesario para generar imágenes profesionales del carrusel
+# Obtener en: https://www.canva.com/settings/apps → Canva Connect → Personal Access Token
+CANVA_API_TOKEN = os.environ.get("CANVA_API_TOKEN", "")
 
 TELEGRAM_API = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
@@ -289,15 +301,30 @@ def run_agent(tema: str = None):
 
     # ── PASO 1b: Generar imágenes del carrusel ────────────────────
     imagenes = []
-    if IMAGENES_DISPONIBLES:
-        print("\n🎨 Generando imágenes del carrusel...")
+    if CANVA_DISPONIBLE:
+        print("\n🎨 Generando imágenes con Canva API (diseño profesional)...")
+        try:
+            imagenes = generar_carrusel_canva(carrusel)
+            print(f"✅ {len(imagenes)} imágenes Canva generadas")
+        except Exception as e:
+            print(f"⚠️  Error con Canva: {e}")
+            # Fallback a Pillow si Canva falla
+            if PILLOW_DISPONIBLE:
+                print("   🔄 Intentando con generador Pillow...")
+                try:
+                    imagenes = generar_imagenes_carrusel(carrusel)
+                    print(f"✅ {len(imagenes)} imágenes Pillow generadas (fallback)")
+                except Exception as e2:
+                    print(f"⚠️  Error con Pillow también: {e2}. Continuando sin imágenes.")
+    elif PILLOW_DISPONIBLE:
+        print("\n🎨 Generando imágenes con Pillow (Canva no disponible)...")
         try:
             imagenes = generar_imagenes_carrusel(carrusel)
             print(f"✅ {len(imagenes)} imágenes generadas")
         except Exception as e:
             print(f"⚠️  Error generando imágenes: {e}. Continuando sin imágenes.")
     else:
-        print("⚠️  Pillow no disponible. Se enviará solo el texto del carrusel.")
+        print("⚠️  Sin generador de imágenes disponible. Se enviará solo el texto.")
 
     # ── PASO 2: Enviar a Martín para revisión ─────────────────────
     print(f"\n📤 Enviando preview a Martín (chat_id: {CHAT_ID_MARTIN})...")
