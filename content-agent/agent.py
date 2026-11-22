@@ -19,6 +19,13 @@ import requests
 import anthropic
 from datetime import datetime
 
+# Generador de imágenes (opcional — requiere Pillow)
+try:
+    from carousel_generator import generar_imagenes_carrusel, LAYOUT_NAMES
+    IMAGENES_DISPONIBLES = True
+except ImportError:
+    IMAGENES_DISPONIBLES = False
+
 # ─── Configuración ────────────────────────────────────────────────────────────
 # Todos los valores sensibles vienen de variables de entorno
 # Ver .env.example para configuración
@@ -46,6 +53,47 @@ TEMAS_CARRUSEL = [
 ]
 
 # ─── Helpers de Telegram ──────────────────────────────────────────────────────
+
+def tg_send_photo(chat_id: int, image_path: str, caption: str = "", reply_markup: dict = None) -> dict:
+    """Envía una foto a Telegram."""
+    data = {"chat_id": chat_id, "parse_mode": "HTML"}
+    if caption:
+        data["caption"] = caption
+    if reply_markup:
+        data["reply_markup"] = json.dumps(reply_markup)
+    with open(image_path, "rb") as f:
+        r = requests.post(
+            f"{TELEGRAM_API}/sendPhoto",
+            data=data,
+            files={"photo": f},
+            timeout=30,
+        )
+    r.raise_for_status()
+    return r.json()
+
+
+def tg_send_media_group(chat_id: int, image_paths: list[str]) -> dict:
+    """Envía un álbum de fotos (media group) a Telegram."""
+    media = []
+    files = {}
+    for i, path in enumerate(image_paths):
+        key = f"photo_{i}"
+        media.append({"type": "photo", "media": f"attach://{key}"})
+        files[key] = open(path, "rb")
+
+    try:
+        r = requests.post(
+            f"{TELEGRAM_API}/sendMediaGroup",
+            data={"chat_id": chat_id, "media": json.dumps(media)},
+            files=files,
+            timeout=60,
+        )
+        r.raise_for_status()
+        return r.json()
+    finally:
+        for f in files.values():
+            f.close()
+
 
 def tg_send(chat_id: int, text: str, reply_markup: dict = None) -> dict:
     """Envía mensaje de texto a Telegram."""
@@ -239,6 +287,18 @@ def run_agent(tema: str = None):
 
     preview_text = formatear_preview_carrusel(carrusel)
 
+    # ── PASO 1b: Generar imágenes del carrusel ────────────────────
+    imagenes = []
+    if IMAGENES_DISPONIBLES:
+        print("\n🎨 Generando imágenes del carrusel...")
+        try:
+            imagenes = generar_imagenes_carrusel(carrusel)
+            print(f"✅ {len(imagenes)} imágenes generadas")
+        except Exception as e:
+            print(f"⚠️  Error generando imágenes: {e}. Continuando sin imágenes.")
+    else:
+        print("⚠️  Pillow no disponible. Se enviará solo el texto del carrusel.")
+
     # ── PASO 2: Enviar a Martín para revisión ─────────────────────
     print(f"\n📤 Enviando preview a Martín (chat_id: {CHAT_ID_MARTIN})...")
     botones_martin = {
@@ -247,7 +307,24 @@ def run_agent(tema: str = None):
             {"text": "✏️ Cambiar tema", "callback_data": "martin_cambiar"},
         ]]
     }
-    msg_martin = tg_send(CHAT_ID_MARTIN, preview_text, botones_martin)
+
+    # Si hay imágenes: enviar carrusel visual + botones por separado
+    if imagenes:
+        # Enviar primeras 7 fotos como álbum
+        print("  📸 Enviando imágenes como álbum...")
+        tg_send_media_group(CHAT_ID_MARTIN, imagenes)
+        # Luego enviar el texto con botones de aprobación
+        encabezado = (
+            f"🧬 <b>NUEVO CARRUSEL BIO-PRECISE™</b>\n"
+            f"📌 <b>Tema:</b> {carrusel['tema']}\n\n"
+            f"<i>↑ Revisa las {len(imagenes)} imágenes de arriba</i>\n\n"
+            f"📝 <b>Caption:</b>\n{carrusel['caption'][:300]}...\n\n"
+            f"🏷️ {' '.join(carrusel['hashtags'][:8])}..."
+        )
+        msg_martin = tg_send(CHAT_ID_MARTIN, encabezado, botones_martin)
+    else:
+        msg_martin = tg_send(CHAT_ID_MARTIN, preview_text, botones_martin)
+
     msg_id_martin = msg_martin["result"]["message_id"]
     print(f"✅ Mensaje enviado (message_id: {msg_id_martin})")
 
@@ -270,17 +347,29 @@ def run_agent(tema: str = None):
 
     # ── PASO 4: Enviar a Gabriela para aprobación final ───────────
     print(f"\n📤 Enviando a Gabriela (chat_id: {CHAT_ID_GABRIELA})...")
-    texto_gabriela = (
-        f"🧬 <b>BIO-PRECISE™ — Carrusel para aprobar</b>\n\n"
-        f"Martín ya revisó y aprobó este carrusel. ¿Lo publicamos en Instagram?\n\n"
-        + preview_text
-    )
     botones_gabriela = {
         "inline_keyboard": [[
             {"text": "✅ Publicar ahora", "callback_data": "gabriela_aprobar"},
             {"text": "✏️ Pedir cambios", "callback_data": "gabriela_cambiar"},
         ]]
     }
+
+    if imagenes:
+        tg_send_media_group(CHAT_ID_GABRIELA, imagenes)
+        texto_gabriela = (
+            f"🧬 <b>BIO-PRECISE™ — Carrusel para aprobar</b>\n\n"
+            f"Martín ya revisó y aprobó este carrusel. ¿Lo publicamos en Instagram?\n\n"
+            f"📌 <b>Tema:</b> {carrusel['tema']}\n\n"
+            f"📝 <b>Caption completo:</b>\n{carrusel['caption']}\n\n"
+            f"🏷️ {' '.join(carrusel['hashtags'])}"
+        )
+    else:
+        texto_gabriela = (
+            f"🧬 <b>BIO-PRECISE™ — Carrusel para aprobar</b>\n\n"
+            f"Martín ya revisó y aprobó este carrusel. ¿Lo publicamos en Instagram?\n\n"
+            + preview_text
+        )
+
     msg_gabriela = tg_send(CHAT_ID_GABRIELA, texto_gabriela, botones_gabriela)
     msg_id_gabriela = msg_gabriela["result"]["message_id"]
     print(f"✅ Mensaje enviado (message_id: {msg_id_gabriela})")
