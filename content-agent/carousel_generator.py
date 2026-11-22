@@ -11,6 +11,7 @@ import os
 import json
 import math
 import hashlib
+import tempfile
 from pathlib import Path
 
 try:
@@ -535,10 +536,10 @@ def generar_imagenes_carrusel(carrusel: dict, output_dir: str = None) -> list[st
 
     print(f"🎨 Layout seleccionado: {LAYOUT_NAMES[layout_idx]} (#{layout_idx})")
 
-    # Directorio de salida
+    # Directorio de salida — compatible con Windows y Linux
     if output_dir is None:
         short_hash = hashlib.md5(carrusel["tema"].encode()).hexdigest()[:8]
-        output_dir = f"/tmp/bio-precise-{short_hash}"
+        output_dir = os.path.join(tempfile.gettempdir(), f"bio-precise-{short_hash}")
 
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
@@ -554,11 +555,13 @@ def generar_imagenes_carrusel(carrusel: dict, output_dir: str = None) -> list[st
     return rutas
 
 
-def preview_layouts(output_dir: str = "/tmp/bio-precise-preview"):
+def preview_layouts(output_dir: str = None):
     """
     Genera una diapositiva de muestra de cada layout para previsualización.
     Útil para elegir estilos.
     """
+    if output_dir is None:
+        output_dir = os.path.join(tempfile.gettempdir(), "bio-precise-preview")
     slide_muestra = {
         "numero": 1,
         "titulo": "¿Por qué no bajas de peso aunque haces dieta?",
